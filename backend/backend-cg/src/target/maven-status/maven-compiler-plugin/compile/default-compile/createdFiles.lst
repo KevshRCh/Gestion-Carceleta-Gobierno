@@ -1,0 +1,11 @@
+com\example\demo\controlador\ControladorDetenido.class
+com\example\demo\interfaces\IUsuario.class
+com\example\demo\modelo\ModeloDetenido.class
+com\example\demo\controlador\ControladorInicio.class
+com\example\demo\modelo\ModeloUsuario.class
+com\example\demo\service\DetenidoService.class
+com\example\demo\service\JwtService.class
+com\example\demo\interfaces\IDetenido.class
+com\example\demo\controlador\ControladorUsuario.class
+com\example\demo\CrudCarceletaApplication.class
+com\example\demo\service\UsuarioService.class
