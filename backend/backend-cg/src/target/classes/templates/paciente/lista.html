@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Pacientes</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+    <!-- SweetAlert2 CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+    <style>
+        .action-buttons {
+            white-space: nowrap;
+        }
+        .table-responsive {
+            overflow-x: auto;
+        }
+        .table th {
+            background-color: #343a40;
+            color: white;
+        }
+        .btn-add {
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container mt-4">
+        <h1 class="text-center mb-4">Lista de Pacientes</h1>
+        
+        <!-- Botón para agregar nuevo paciente -->
+        <div class="mb-3 btn-add">
+            <a th:href="@{/paciente/nuevo}" class="btn btn-success">
+                <i class="bi bi-plus-circle"></i> Agregar Paciente
+            </a>
+        </div>
+        
+        <!-- Tabla de pacientes -->
+        <div class="table-responsive">
+            <table class="table table-striped table-hover table-bordered">
+                <thead class="table-dark">
+                    <tr>
+                        <th>ID</th>
+                        <th>Nombre</th>
+                        <th>Apellido</th>
+                        <th>Fecha Nacimiento</th>
+                        <th>Dirección</th>
+                        <th>Teléfono</th>
+                        <th>Email</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="paciente : ${pacientes}">
+                        <td th:text="${paciente.id_paciente}"></td>
+                        <td th:text="${paciente.nombre}"></td>
+                        <td th:text="${paciente.apellido}"></td>
+                        <td th:text="${paciente.fecha_nacimiento != null} ? ${#temporals.format(paciente.fecha_nacimiento, 'dd/MM/yyyy')} : 'No registrada'"></td>
+                        <td th:text="${paciente.direccion != null} ? ${paciente.direccion} : 'No registrada'"></td>
+                        <td th:text="${paciente.telefono != null} ? ${paciente.telefono} : 'No registrado'"></td>
+                        <td th:text="${paciente.email != null} ? ${paciente.email} : 'No registrado'"></td>
+                        <td class="action-buttons">
+                            <!-- Botón Ver -->
+                            <a th:href="@{'/paciente/ver/' + ${paciente.id_paciente}}" 
+                               class="btn btn-info btn-sm">
+                                <i class="bi bi-eye"></i> Ver
+                            </a>
+                            
+                            <!-- Botón Editar -->
+                            <a th:href="@{'/paciente/editar/' + ${paciente.id_paciente}}" 
+                               class="btn btn-primary btn-sm ms-1">
+                                <i class="bi bi-pencil"></i> Editar
+                            </a>
+                            
+                            <!-- Botón Eliminar -->
+                            <a href="#" th:onclick="'confirmarEliminacion(event, ' + ${paciente.id_paciente} + ')'" 
+   class="btn btn-danger btn-sm ms-1">
+    <i class="bi bi-trash"></i> Eliminar
+</a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- SweetAlert2 JS -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    
+    <script>
+        function confirmarEliminacion(event, idPaciente) {
+            event.preventDefault();
+            
+            Swal.fire({
+                title: '¿Estás seguro?',
+                text: "¡No podrás revertir esta acción!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#d33',
+                cancelButtonColor: '#3085d6',
+                confirmButtonText: 'Sí, eliminar',
+                cancelButtonText: 'Cancelar'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    // Primero muestra el checkmark de éxito
+                    Swal.fire({
+                        title: '¡Eliminado!',
+                        text: 'El paciente ha sido eliminado correctamente.',
+                        icon: 'success',
+                        showConfirmButton: false,
+                        timer: 1500
+                    }).then(() => {
+                        // Después de mostrar el checkmark, redirige para actualizar la lista
+                        window.location.href = '/paciente/eliminar/' + idPaciente;
+                    });
+                }
+            });
+        }
+    </script>
+</body>
+</html>
