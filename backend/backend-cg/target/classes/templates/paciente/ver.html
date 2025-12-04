@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detalles del Paciente</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+    <style>
+        .patient-card {
+            border-radius: 15px;
+            box-shadow: 0 6px 10px rgba(0,0,0,0.1);
+        }
+        .patient-header {
+            border-top-left-radius: 15px;
+            border-top-right-radius: 15px;
+        }
+        .detail-label {
+            font-weight: 600;
+            color: #495057;
+        }
+    </style>
+</head>
+<body>
+    <div class="container py-5">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <!-- Tarjeta de paciente -->
+                <div class="card patient-card mb-4">
+                    <!-- Encabezado -->
+                    <div class="card-header patient-header bg-primary text-white">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <h2 class="mb-0">
+                                <i class="bi bi-person-badge me-2"></i>
+                                Detalles del Paciente
+                            </h2>
+                            <a th:href="@{/paciente/lista}" class="btn btn-light btn-sm">
+                                <i class="bi bi-arrow-left"></i> Volver
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <!-- Cuerpo -->
+                    <div class="card-body">
+                        <div th:if="${paciente != null}">
+                            <div class="row mb-4">
+                                <div class="col-md-6">
+                                    <p class="mb-3">
+                                        <span class="detail-label"><i class="bi bi-card-text me-2"></i>ID:</span>
+                                        <span th:text="${paciente.id_paciente}" class="fw-bold"></span>
+                                    </p>
+                                    <p class="mb-3">
+                                        <span class="detail-label"><i class="bi bi-person me-2"></i>Nombre:</span>
+                                        <span th:text="${paciente.nombre}"></span>
+                                    </p>
+                                    <p class="mb-3">
+                                        <span class="detail-label"><i class="bi bi-person me-2"></i>Apellido:</span>
+                                        <span th:text="${paciente.apellido}"></span>
+                                    </p>
+                                </div>
+                                <div class="col-md-6">
+                                    <p class="mb-3">
+                                        <span class="detail-label"><i class="bi bi-telephone me-2"></i>Teléfono:</span>
+                                        <span th:text="${paciente.telefono != null} ? ${paciente.telefono} : 'No registrado'"></span>
+                                    </p>
+                                    <p class="mb-3">
+                                        <span class="detail-label"><i class="bi bi-envelope me-2"></i>Email:</span>
+                                        <span th:text="${paciente.email != null} ? ${paciente.email} : 'No registrado'"></span>
+                                    </p>
+                                    <p class="mb-3">
+                                        <span class="detail-label"><i class="bi bi-calendar me-2"></i>Fecha Nacimiento:</span>
+                                        <span th:text="${paciente.fecha_nacimiento != null} ? ${#temporals.format(paciente.fecha_nacimiento, 'dd/MM/yyyy')} : 'No registrada'"></span>
+                                    </p>
+                                </div>
+                            </div>
+                            
+                            <div class="row">
+                                <div class="col-12">
+                                    <p class="mb-3">
+                                        <span class="detail-label"><i class="bi bi-geo-alt me-2"></i>Dirección:</span>
+                                        <span th:text="${paciente.direccion != null} ? ${paciente.direccion} : 'No registrada'"></span>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div th:unless="${paciente != null}" class="alert alert-warning">
+                            No se encontró información del paciente
+                        </div>
+                    </div>
+                    
+                    <!-- Pie de tarjeta -->
+                    <div class="card-footer bg-light d-flex justify-content-end" th:if="${paciente != null}">
+                        <a th:href="@{'/paciente/editar/' + ${paciente.id_paciente}}" 
+                           class="btn btn-primary me-2">
+                            <i class="bi bi-pencil-square"></i> Editar
+                        </a>
+                        <a th:href="@{'/paciente/eliminar/' + ${paciente.id_paciente}}" 
+                           class="btn btn-danger"
+                           onclick="return confirm('¿Está seguro de eliminar este paciente?');">
+                            <i class="bi bi-trash"></i> Eliminar
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
