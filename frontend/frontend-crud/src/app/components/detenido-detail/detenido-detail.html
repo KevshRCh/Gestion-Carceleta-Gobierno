@@ -1,0 +1,52 @@
+<div class="content-wrapper p-4">
+  <header class="mb-4 text-center">
+    <h1 class="fw-bold text-dark">Detalle del Detenido</h1>
+    <p class="text-muted">Proceso de Gestión de Internamiento - Carceleta del Gobierno</p>
+  </header>
+
+  @if (detenido) {
+    <div class="card shadow-sm border-0">
+      <div class="card-header bg-dark text-white">
+        Información del Detenido
+      </div>
+
+      <div class="card-body">
+        <div class="row mb-3">
+          <div class="col-md-6">
+            <p><strong>ID:</strong> {{ detenido.id_detenido }}</p>
+            <p><strong>DNI:</strong> {{ detenido.dni }}</p>
+            <p><strong>Nombres:</strong> {{ detenido.nombres }}</p>
+          </div>
+
+          <div class="col-md-6">
+            <p><strong>Apellidos:</strong> {{ detenido.apellidos }}</p>
+            <p><strong>Fecha Nacimiento:</strong> {{ detenido.fecha_nacimiento | date:'dd/MM/yyyy' }}</p>
+            <p><strong>Fecha Ingreso:</strong> {{ detenido.fecha_ingreso | date:'dd/MM/yyyy' }}</p>
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <p><strong>Motivo de Detención:</strong></p>
+          <div class="motivo-box">
+            {{ detenido.motivo_detencion }}
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Botones -->
+    <div class="text-center mt-4">
+      <button class="btn btn-primary px-4 me-2" [routerLink]="['/detenidos', detenido.id_detenido, 'editar']">
+        ✏️ Editar
+      </button> 
+      <button class="btn btn-secondary px-4" routerLink="/detenidos">
+        ← Volver
+      </button>
+    </div>
+  } @else {
+    <div class="status-card info text-center p-4">
+      <div class="spinner-border text-primary me-2" role="status"></div>
+      <span class="fw-semibold">Cargando datos del detenido...</span>
+    </div>
+  }
+</div>

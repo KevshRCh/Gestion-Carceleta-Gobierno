@@ -1,0 +1,74 @@
+<div class="content-wrapper p-4">
+  <header class="mb-4 text-center">
+    <h1 class="fw-bold text-dark">Registro de Detenidos</h1>
+    <p class="text-muted">Proceso de Gestión de Internamiento - Carceleta del Gobierno</p>
+  </header>
+
+  <form [formGroup]="detenidoForm" (ngSubmit)="guardar()" novalidate class="detenido-form">
+    <!-- Sección: Información del Detenido -->
+    <div class="card shadow-sm border-0 mb-4">
+      <div class="card-header bg-dark text-white">
+        Información del Detenido
+      </div>
+
+      <div class="card-body">
+        <!-- Fila: DNI y Nombres -->
+        <div class="row mb-3">
+          <div class="col-md-6">
+            <label for="dni" class="form-label fw-semibold">DNI *</label>
+            <input id="dni" type="text" class="form-control" formControlName="dni" />
+            <div *ngIf="detenidoForm.get('dni')?.invalid && detenidoForm.get('dni')?.touched" class="text-danger mt-1">
+              El DNI es obligatorio y debe tener al menos 8 caracteres
+            </div>
+          </div>
+
+          <div class="col-md-6">
+            <label for="nombres" class="form-label fw-semibold">Nombres *</label>
+            <input id="nombres" type="text" class="form-control" formControlName="nombres" />
+            <div *ngIf="detenidoForm.get('nombres')?.invalid && detenidoForm.get('nombres')?.touched" class="text-danger mt-1">
+              El nombre es obligatorio
+            </div>
+          </div>
+        </div>
+
+        <!-- Fila: Apellidos y Fecha Nacimiento -->
+        <div class="row mb-3">
+          <div class="col-md-6">
+            <label for="apellidos" class="form-label fw-semibold">Apellidos *</label>
+            <input id="apellidos" type="text" class="form-control" formControlName="apellidos" />
+            <div *ngIf="detenidoForm.get('apellidos')?.invalid && detenidoForm.get('apellidos')?.touched" class="text-danger mt-1">
+              El apellido es obligatorio
+            </div>
+          </div>
+
+          <div class="col-md-6">
+            <label for="fecha_nacimiento" class="form-label fw-semibold">Fecha de Nacimiento</label>
+            <input type="date" id="fecha_nacimiento" class="form-control" formControlName="fecha_nacimiento" />
+          </div>
+        </div>
+
+        <!-- Motivo de Detención -->
+        <div class="mb-3">
+          <label for="motivo_detencion" class="form-label fw-semibold">Motivo de Detención *</label>
+          <textarea id="motivo_detencion" class="form-control" formControlName="motivo_detencion" rows="3"></textarea>
+        </div>
+
+        <!-- Fecha de Ingreso -->
+        <div class="mb-3">
+          <label for="fecha_ingreso" class="form-label fw-semibold">Fecha de Ingreso *</label>
+          <input type="date" id="fecha_ingreso" class="form-control" formControlName="fecha_ingreso" />
+        </div>
+      </div>
+    </div>
+
+    <!-- Botones -->
+    <div class="text-center mt-4">
+      <button type="submit" class="btn btn-primary px-4 me-2" [disabled]="detenidoForm.invalid">
+        💾 Guardar Registro
+      </button>
+      <button type="button" class="btn btn-danger px-4" routerLink="/detenidos">
+        ❌ Cancelar
+      </button>
+    </div>
+  </form>
+</div>

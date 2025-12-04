@@ -1,0 +1,89 @@
+<div class="content-wrapper p-4">
+  <header class="mb-4 text-center">
+    <h1 class="fw-bold text-dark">Listado de Detenidos</h1>
+    <p class="text-muted">Proceso de Gestión de Internamiento - Carceleta del Gobierno</p>
+
+    <!-- 🔍 Barra de búsqueda -->
+    <div class="search-bar mt-3 d-flex justify-content-center">
+      <label for="buscar" class="visually-hidden">Buscar detenido por nombre o DNI</label>
+      <input
+        id="buscar"
+        type="text"
+        class="form-control w-50"
+        placeholder="Buscar por nombre o DNI..."
+        [(ngModel)]="terminoBusqueda"
+        (input)="buscarDetenidos()"
+      />
+    </div>
+  </header>
+
+  <!-- Estado: Cargando -->
+  @if (isLoading) {
+    <div class="status-card info text-center p-3">
+      <div class="spinner-border text-primary me-3" role="status"></div>
+      <span class="fw-semibold">Cargando lista de detenidos...</span>
+    </div>
+  }
+
+  <!-- Estado: Error -->
+  @if (errorMessage && !isLoading) {
+    <div class="status-card danger text-center p-3">
+      <h4 class="status-title">Ocurrió un error</h4>
+      <p class="mb-2">{{ errorMessage }}</p>
+      <button class="btn btn-danger btn-sm" (click)="loadDetenidos()">🔁 Reintentar</button>
+    </div>
+  }
+
+  <!-- Estado: Sin registros -->
+  @if (!isLoading && !errorMessage && detenidosFiltrados.length === 0) {
+    <div class="status-card warning text-center p-3">
+      ⚠️ No se encontraron detenidos registrados.
+    </div>
+  }
+
+  <!-- Tabla -->
+  @if (!isLoading && detenidosFiltrados.length > 0) {
+    <div class="card">
+      <div class="card-header bg-dark text-white">
+        Registro de Detenidos
+      </div>
+
+      <div class="card-body p-0">
+        <div class="table-responsive">
+          <table class="table table-bordered table-hover align-middle mb-0">
+            <thead class="table-dark">
+              <tr>
+                <th>ID</th>
+                <th>DNI</th>
+                <th>Nombres</th>
+                <th>Apellidos</th>
+                <th>Fecha Nacimiento</th>
+                <th>Motivo Detención</th>
+                <th>Fecha Ingreso</th>
+                <th>Acciones</th>
+              </tr>
+            </thead>
+            <tbody>
+              @for (detenido of detenidosFiltrados; track detenido.id_detenido) {
+                <tr>
+                  <td>{{ detenido.id_detenido }}</td>
+                  <td>{{ detenido.dni }}</td>
+                  <td>{{ detenido.nombres }}</td>
+                  <td>{{ detenido.apellidos }}</td>
+                  <td>{{ detenido.fecha_nacimiento | date:'dd/MM/yyyy' }}</td>
+                  <td>{{ detenido.motivo_detencion }}</td>
+                  <td>{{ detenido.fecha_ingreso | date:'dd/MM/yyyy' }}</td>
+                  <td class="text-center">
+                    <a [routerLink]="['/detenidos', detenido.id_detenido]" class="btn btn-info btn-sm me-1">👁️ Ver</a>
+                    <a [routerLink]="['/detenidos', detenido.id_detenido, 'editar']" class="btn btn-warning btn-sm me-1">✏️ Editar</a>
+                    <button class="btn btn-danger btn-sm" (click)="eliminarDetenido(detenido.id_detenido)">🗑️</button>
+                  </td>
+                </tr>
+              }
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  }
+</div>

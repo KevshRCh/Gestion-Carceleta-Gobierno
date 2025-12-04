@@ -1,0 +1,102 @@
+/* Fondo general igual al listado */
+.content-wrapper {
+  background-color: #f4f6f9;
+  min-height: 100vh;
+  padding: 2rem;
+}
+
+/* Encabezado */
+header h1 {
+  font-weight: 700;
+  color: #2c3e50;
+}
+
+header p {
+  color: #6c757d;
+  font-size: 0.95rem;
+}
+
+/* Card */
+.card {
+  background-color: #ffffff;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.card-header {
+  font-size: 1.1rem;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+
+/* Contenido del detalle */
+.card-body p {
+  margin-bottom: 0.75rem;
+  color: #2c3e50;
+}
+
+strong {
+  color: #000;
+}
+
+/* Caja del motivo */
+.motivo-box {
+  background-color: #f8f9fa;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  padding: 12px 15px;
+  font-size: 0.95rem;
+  color: #333;
+  white-space: pre-wrap;
+}
+
+/* Botones */
+.btn {
+  font-weight: 600;
+  border-radius: 6px;
+  transition: all 0.2s ease;
+}
+
+.btn-primary {
+  background-color: #007bff;
+  border: none;
+}
+
+.btn-primary:hover {
+  background-color: #0056b3;
+}
+
+.btn-secondary {
+  background-color: #6c757d;
+  border: none;
+}
+
+.btn-secondary:hover {
+  background-color: #5a6268;
+}
+
+/* Estado de carga */
+.status-card {
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  padding: 1.5rem;
+  max-width: 400px;
+  margin: 4rem auto;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .content-wrapper {
+    padding: 1rem;
+  }
+
+  .card-body {
+    padding: 1rem;
+  }
+
+  .btn {
+    width: 100%;
+    margin-bottom: 10px;
+  }
+}

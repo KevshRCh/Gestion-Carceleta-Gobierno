@@ -1,0 +1,151 @@
+/* RESET ROBUSTO PARA EL LAYOUT COMPLETO */
+/* ---------------------------------------------------- */
+*,
+*::before,
+*::after {
+  box-sizing: border-box; /* CLAVE: Asegura que el padding no cause desbordamiento */
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  height: 100%; /* Ocupa toda la altura de la ventana */
+  width: 100%;  /* Ocupa todo el ancho de la ventana */
+  overflow-x: hidden; /* Evita que el scroll horizontal aparezca por error */
+}
+/* ---------------------------------------------------- */
+
+
+/* CONTENEDOR GENERAL DIVIDIDO EN DOS */
+.container {
+  display: flex;
+  height: 100vh;
+  width: 100%;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* ------------------ LADO IZQUIERDO ------------------ */
+.left-side {
+  width: 50%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.left-side img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* ------------------ LADO DERECHO ------------------ */
+.right-side {
+  width: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #0d1b2a, #1b263b);
+  padding: 2rem;
+}
+
+/* Tarjeta principal */
+.login-card {
+  background: #ffffff;
+  padding: 2.5rem 3rem;
+  border-radius: 15px;
+  width: 100%;
+  max-width: 420px;
+  text-align: center;
+  color: #1b263b;
+}
+
+/* Título */
+.title {
+  font-size: 1.6rem;
+  font-weight: bold;
+  color: #0d1b2a;
+  margin-bottom: 0.5rem;
+}
+
+/* Subtítulo */
+.subtitle {
+  font-size: 0.95rem;
+  color: #3b4b68;
+  margin-bottom: 2rem;
+}
+
+/* Campos del formulario */
+.form-group {
+  margin-bottom: 1.5rem;
+  text-align: left;
+}
+
+label {
+  display: block;
+  margin-bottom: 0.4rem;
+  font-weight: 600;
+  color: #1b263b;
+}
+
+input {
+  width: 100%;
+  padding: 0.7rem;
+  border: 1.5px solid #ccc;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  outline: none;
+  transition: all 0.2s ease;
+}
+
+input:focus {
+  border-color: #1e6091;
+  box-shadow: 0 0 4px rgba(30, 96, 145, 0.3);
+}
+
+/* Botón */
+.btn-login {
+  width: 100%;
+  background-color: #1e6091;
+  color: white;
+  padding: 0.8rem;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.btn-login:hover {
+  background-color: #184e77;
+}
+
+/* Mensajes */
+.error-message {
+  color: #d90429;
+  margin-top: 1rem;
+  font-weight: 500;
+}
+
+.success-message {
+  color: #2a9d8f;
+  margin-top: 1rem;
+  font-weight: 500;
+}
+
+/* Sombra */
+.shadow-lg {
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+/* RESPONSIVE */
+@media (max-width: 900px) {
+  .container {
+    flex-direction: column;
+  }
+
+  .left-side,
+  .right-side {
+    width: 100%;
+    height: 50vh;
+  }
+}

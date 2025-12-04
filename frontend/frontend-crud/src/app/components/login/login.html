@@ -1,0 +1,43 @@
+  <div class="container">
+    <!-- LADO IZQUIERDO: IMAGEN -->
+    <div class="left-side">
+      <img src="imagenes/carceleta.png"/> 
+    </div>
+
+    <!-- LADO DERECHO: FORMULARIO -->
+    <div class="right-side">
+      <div class="login-card shadow-lg">
+        <h1 class="title">🚔 Sistema de Gestión de Detenidos</h1>
+        <p class="subtitle">Bienvenido, por favor inicie sesión para continuar</p>
+
+        <form (submit)="onLogin()" class="login-form">
+          <div class="form-group">
+            <label for="usuario">👤 Usuario</label>
+            <input
+              id="usuario"
+              type="text"
+              placeholder="Ingrese su usuario"
+              (input)="usuario = $any($event.target).value"
+              required
+            />
+          </div>
+
+          <div class="form-group">
+            <label for="password">🔒 Contraseña</label>
+            <input
+              id="password"
+              type="password"
+              placeholder="Ingrese su contraseña"
+              (input)="password = $any($event.target).value"
+              required
+            />
+          </div>
+
+          <button type="submit" class="btn-login">Ingresar</button>
+
+          <p class="error-message" *ngIf="mensajeError">{{ mensajeError }}</p>
+          <p class="success-message" *ngIf="mensajeExito">{{ mensajeExito }}</p>
+        </form>
+      </div>
+    </div>
+  </div>
